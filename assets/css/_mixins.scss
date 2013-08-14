@@ -1,0 +1,324 @@
+/*
+MIXINS COLLECTION
+
+USAGE:
+make sure file is set, with master CSS importing it. otherwise ALL your includes will break. DO NOT change this file, refer to https://github.com/nonlinear/bettercanvas for updates.
+
+LIST OF MIXINS:
+
+@include reset;
+@include reset-nomargin;
+@include hidetext;
+  hide text from view
+@include ellipsis;
+  add ellipsis to text
+@include clearfix;
+  Clearfix for clearing floats like a boss h5bp.com/q
+@include center-block;
+  Center-align a block level element
+@include size($height: 5px, $width: 5px);
+@include square($size: 5px);
+  Sizing shortcuts
+@include transform($rotate: 90deg, $scale: 1, $skew: 1deg, $left: 10px, $top: 10px);
+  powerful all-together transform function
+@include placeholder($color: $grayLight);
+  Input placeholder text
+@include border-radius($radius: 5px);
+@include border-radius-custom($topleft: 5px, $topright: 5px, $bottomleft: 5px, $bottomright: 5px);
+   Border Radius
+@include box-shadow($shadow: 0 1px 3px rgba(0,0,0,.25));
+  Drop shadows
+@include transition($prop: all, $time: 1s, $ease: linear);
+  transitions
+@include background-clip($clip);
+  add background clipping
+@include translucent-background($color: $white, $alpha: 1);
+@include translucent-border($color: $white, $alpha: 1);
+  Add an alphatransparency value to any background or border color (via Elyse Holladay)
+@include gradient($origin: left, $start: #ffffff, $stop: #000000);
+@include quick-gradient($origin: left, $alpha: 0.2);
+  gradients
+@include reflect($length: 50%, $opacity: 0.2);
+  reflection
+@include opacity($opacity: 100);
+  opacity
+@include font-shorthand($weight: normal, $size: 14px, $lineHeight: 20px);
+@include font-sans-serif($weight: normal, $size: 14px, $lineHeight: 20px);
+@include font-serif($weight: normal, $size: 14px, $lineHeight: 20px);
+@include font-monospace($weight: normal, $size: 12px, $lineHeight: 20px);
+  font stacks
+@function black($opacity);
+@function white($opacity);
+@include box-emboss($opacity, $opacity2);
+@include letterpress($opacity);
+@include hide-text;
+@include navigation-list;
+  from http://sachagreif.com/useful-sass-includes/
+@include translate3d ($x, $y: 0, $z: 0);
+@include perspective ($value: 1000);
+@include transform-origin ($x:center, $y:center);
+@include border-box;
+adapted from http://css-tricks.com/snippets/css/useful-css3-less-includes/
+for @include mq, check plenty of breakpoint examples at _breakpoints.scs
+*/
+@mixin reset {
+  margin: 0px !important;
+  @include reset-nomargin;
+}
+@mixin reset-nomargin {
+  padding:    0px !important;
+  border:     none;
+  background: transparent;
+  @include box-shadow($shadow: 0 0px 0px rgba(0,0,0,.25));
+}
+@mixin hidetext {
+  display:            block;
+  overflow:           hidden;
+  background-repeat:  no-repeat;
+  text-align:         left;
+  text-indent:        -999em;
+  direction:          ltr;
+}
+@mixin ellipsis {
+  overflow:       hidden;
+  text-overflow:  ellipsis;
+  white-space:    nowrap;
+}
+@mixin clearfix {
+  zoom: 1;
+  &:before, &:after {
+    display:  table;
+    content:  "";
+  }
+  &:after {
+    clear:  both;
+  }
+}
+@mixin center-block {
+ display: block;
+ margin:  0 auto;
+}
+@mixin size($height: 5px, $width: 5px) {
+  width:  $width;
+  height: $height;
+}
+@mixin square($size: 5px) {
+ @include size($size, $size);
+}
+@mixin transform($rotate: 90deg, $scale: 1, $skew: 1deg, $left: 10px, $top: 10px) {
+  -webkit-transform: rotate($rotate) scale($scale) skew($skew) translate($left, $top);
+  -moz-transform:    rotate($rotate) scale($scale) skew($skew) translate($left, $top);
+  -ms-transform:     rotate($rotate) scale($scale) skew($skew) translate($left, $top);
+  -o-transform:      rotate($rotate) scale($scale) skew($skew) translate($left, $top);
+  transform:         rotate($rotate) scale($scale) skew($skew) translate($left, $top);
+}
+@mixin placeholder($color: $grayLight) {
+  :-moz-placeholder {
+    color: $color;
+  }
+  ::-webkit-input-placeholder {
+    color: $color;
+  }
+}
+@mixin border-radius($radius: 5px) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius:    $radius;
+  border-radius:         $radius;
+}
+@mixin border-radius-custom($topleft: 5px, $topright: 5px, $bottomleft: 5px, $bottomright: 5px) {
+  -webkit-border-top-right-radius:    $topright;
+  -webkit-border-bottom-right-radius: $bottomright;
+  -webkit-border-bottom-left-radius:  $bottomleft;
+  -webkit-border-top-left-radius:     $topleft;
+  -moz-border-radius-topright:        $topright;
+  -moz-border-radius-bottomright:     $bottomright;
+  -moz-border-radius-bottomleft:      $bottomleft;
+  -moz-border-radius-topleft:         $topleft;
+  border-top-right-radius:            $topright;
+  border-bottom-right-radius:         $bottomright;
+  border-bottom-left-radius:          $bottomleft;
+  border-top-left-radius:             $topleft;
+  -moz-background-clip:               padding; 
+  -webkit-background-clip:            padding-box; 
+  background-clip:                    padding-box; 
+}
+@mixin box-shadow($shadow: 0 1px 3px rgba(0,0,0,.25)) {
+  -webkit-box-shadow:  $shadow;
+  -moz-box-shadow:     $shadow;
+  box-shadow:          $shadow;
+}
+@mixin transition($prop: all, $time: 1s, $ease: linear) {
+  -webkit-transition:  $prop $time $ease;
+  -moz-transition:     $prop $time $ease;
+  -ms-transition:      $prop $time $ease;
+  -o-transition:       $prop $time $ease;
+  transition:          $prop $time $ease;
+}
+@mixin background-clip($clip) {
+ background-clip:         $clip;
+ -webkit-background-clip: $clip;
+ -moz-background-clip:    $clip;
+}
+@mixin translucent-background($color: $white, $alpha: 1) {
+  background-color: hsla(hue($color), saturation($color), lightness($color), $alpha);
+}
+@mixin translucent-border($color: $white, $alpha: 1) {
+  border-color:    hsla(hue($color), saturation($color), lightness($color), $alpha);
+  background-clip: padding-box;
+}
+@mixin gradient($origin: left, $start: #ffffff, $stop: #000000) {
+  background-color: $start;
+  background-image: -webkit-linear-gradient($origin, $start, $stop);
+  background-image: -moz-linear-gradient($origin, $start, $stop);
+  background-image: -o-linear-gradient($origin, $start, $stop);
+  background-image: -ms-linear-gradient($origin, $start, $stop);
+  background-image: linear-gradient($origin, $start, $stop);
+}
+@mixin quick-gradient($origin: left, $alpha: 0.2) {
+  background-image: -webkit-linear-gradient($origin, rgba(0,0,0,0.0), rgba(0,0,0,$alpha));
+  background-image: -moz-linear-gradient($origin, rgba(0,0,0,0.0), rgba(0,0,0,$alpha));
+  background-image: -o-linear-gradient($origin, rgba(0,0,0,0.0), rgba(0,0,0,$alpha));
+  background-image: -ms-linear-gradient($origin, rgba(0,0,0,0.0), rgba(0,0,0,$alpha));
+  background-image: linear-gradient($origin, rgba(0,0,0,0.0), rgba(0,0,0,$alpha));
+}
+@mixin reflect($length: 50%, $opacity: 0.2){
+  -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop($length, transparent), to(rgba(255,255,255,$opacity)));
+}
+@mixin opacity($opacity: 100) {
+  opacity:        $opacity / 100;
+  filter:         "alpha(opacity=#{$opacity})";
+  -khtml-opacity: $opacity / 100;
+  -moz-opacity:   $opacity / 100;
+}
+@mixin font-shorthand($weight: normal, $size: 14px, $lineHeight: 20px) {
+  font-weight: $weight;
+  font-size:   $size;
+  line-height: $lineHeight;
+}
+@mixin font-sans-serif($weight: normal, $size: 14px, $lineHeight: 20px) {
+  font-weight: $weight;
+  font-size:   $size;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: $lineHeight;
+}
+@mixin font-serif($weight: normal, $size: 14px, $lineHeight: 20px) {
+  font-weight: $weight;
+  font-size:   $size;
+  font-family: "Georgia", Times New Roman, Times, serif;
+  line-height: $lineHeight;
+}
+@mixin font-monospace($weight: normal, $size: 12px, $lineHeight: 20px) {
+  font-weight: $weight;
+  font-size:   $size;
+  font-family: "Monaco", Courier New, monospace;
+  line-height: $lineHeight;
+}
+@function black($opacity){
+  @return rgba(0,0,0,$opacity)
+}
+@function white($opacity){
+  @return rgba(255,255,255,$opacity)
+}
+@mixin box-emboss($opacity, $opacity2){
+  box-shadow:white($opacity) 0 1px 0, inset black($opacity2) 0 1px 0;
+}
+@mixin letterpress($opacity){
+  text-shadow:white($opacity) 0 1px 0;
+}
+@mixin text-shadow($opacity: .4, $blur: 3px){
+  text-shadow:black($opacity) 0 1px $blur;
+}
+@mixin hide-text {
+  font:        0/0 a;
+  text-shadow: none;
+  color:       transparent;
+}
+@mixin navigation-list {
+  list-style-type: none;
+  padding:         0;
+  margin:          0;
+  overflow:        hidden;
+  > li{
+    display: block;
+    float:   left;
+    &:last-child{
+      margin-right: 0px;
+    }
+  }
+}
+@mixin translate3d ($x: 0, $y: 0, $z: 0) {
+  -webkit-transform: translate3d($x, $y, $z);
+  -moz-transform:    translate3d($x, $y, $z);
+  -ms-transform:     translate3d($x, $y, $z);
+  -o-transform:      translate3d($x, $y, $z);
+}
+@mixin perspective ($value: 1000) {
+  -webkit-perspective:  $value;
+  -moz-perspective:     $value;
+  -ms-perspective:      $value;
+  perspective:          $value;
+}
+@mixin transform-origin ($x:center, $y:center) {
+  -webkit-transform-origin: $x $y;
+  -moz-transform-origin:    $x $y;
+  -ms-transform-origin:     $x $y;
+  -o-transform-origin:      $x $y;
+}
+@mixin border-box {
+  box-sizing:         border-box;
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+}
+@mixin placeholder {
+  &.placeholder                { @content }
+  &::-webkit-input-placeholder { @content }
+  &:-moz-placeholder           { @content }
+  &::-moz-placeholder          { @content }
+  &:-ms-input-placeholder      { @content }
+}
+/*
+http://alwaystwisted.com/post.php?s=2013-04-01-my-media-query-mixin
+*/
+$ipod1: 320px; 
+$ipod2: 480px;
+$ipad1: 768px; 
+$ipad2: 1024px;
+@mixin mq($point, $query1: min, $query2: width, $IE9: false) {
+    @if $IE9 == true{
+        .lt-ie9 & {
+            @content;
+        }
+        @media screen and (#{$query1}-#{$query2}: $point / $doc-font-size +em) {
+            @content;
+        }
+    }
+
+    @else {
+        @media screen and (#{$query1}-#{$query2}: $point / $doc-font-size +em) {
+            @content;
+        }
+    }
+}
+@mixin orient($orientation: landscape) {
+  @media (orientation : $orientation) {
+    @content;  
+  }
+}
+$base-color:  $Chocolate; // Set a base color
+$complement:  adjust-hue($base-color, 180);
+$split1:      adjust-hue($base-color, 158);
+$split2:      adjust-hue($base-color, -158);
+$triad1:      adjust-hue($base-color, 135);
+$triad2:      adjust-hue($base-color, -135);
+$tetra1:      adjust-hue($base-color, 90);
+$tetra2:      adjust-hue($base-color, -90);
+$analog1:     adjust-hue($base-color, 22);
+$analog2:     adjust-hue($base-color, -22);
+$dark1:       darken($base-color, 10%);
+$dark2:       darken($base-color, 20%);
+$dark3:       darken($base-color, 30%);
+$dark4:       darken($base-color, 40%);
+$light1:      lighten($base-color, 10%);
+$light2:      lighten($base-color, 20%);
+$light3:      lighten($base-color, 30%);
+$light4:      lighten($base-color, 40%);
