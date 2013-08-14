@@ -1,0 +1,8 @@
+- add accelerometer detector
+- create simplellax html example (modal, etc)
+- parallax from mouse to accelerometer
+- layers are:
+	- body
+	- .container
+	- .modal
+- what if we have an object inside another?
