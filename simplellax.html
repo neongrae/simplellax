@@ -11,20 +11,39 @@
   <meta name="keywords" content="">
   <meta name="description" content="">
   <link href="assets/css/style.css" rel="stylesheet">
+  <script type='text/javascript'>window.mod_pagespeed_start = Number(new Date());</script>
+
 </head>
 <body>
-  <div class="container">
-    <nav>Navigation Here</nav>
-    <div class="row">
-      <div class="span2">
-        Sidebar Here
-      </div>
-      <div class="span10">
-        Content Here
-      </div>
-    </div>
-  </div>
+	<div class="main">
+	  <h2>Device Orientation</h2>
+	  <table>
+	    <tr>
+	      <td>Event Supported</td>
+	      <td id="doEvent"></td>
+	    </tr>
+	    <tr>
+	      <td>Tilt Left/Right [gamma]</td>
+	      <td id="doTiltLR"></td>
+	    </tr>
+	    <tr>
+	      <td>Tilt Front/Back [beta]</td>
+	      <td id="doTiltFB"></td>
+	    </tr>
+	    <tr>
+	      <td>Direction [alpha]</td>
+	      <td id="doDirection"></td>
+	    </tr>
+	   </table>
+	</div>
+
+	<div class="container" style="perspective: 300;">
+		<img src="assets/img/spaceship.png" id="imgLogo" class="logo">
+	</div>
+
+</div>
   <script src="assets/js/jquery.js"></script>
   <script src="assets/js/bootstrap.js"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
